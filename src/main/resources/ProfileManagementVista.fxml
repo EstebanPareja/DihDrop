@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.ProfileManagementController">
+    <children>
+        <VBox layoutX="25.0" layoutY="25.0" prefWidth="550.0" spacing="15.0">
+            <children>
+                <Label text="Gestionar Mi Perfil">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+
+                <!-- SECCIÓN DE DATOS PERSONALES -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Información Personal">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <Label text="Nombre Completo:" />
+                        <TextField fx:id="nombreField" />
+                        <Label text="Correo Electrónico:" />
+                        <TextField fx:id="correoField" />
+                        <Label text="Teléfono:" />
+                        <TextField fx:id="telefonoField" />
+                        <Button fx:id="guardarCambiosButton" onAction="#handleGuardarCambios" prefHeight="30.0" prefWidth="150.0" text="Guardar Cambios">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- SECCIÓN DE DIRECCIONES FRECUENTES -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Mis Direcciones Frecuentes">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <ListView fx:id="direccionesListView" prefHeight="150.0" />
+                        <HBox spacing="10.0">
+                            <children>
+                                <Button fx:id="anadirDireccionButton" onAction="#handleAnadirDireccion" text="Añadir Nueva" />
+                                <Button fx:id="editarDireccionButton" disable="true" onAction="#handleEditarDireccion" text="Editar Seleccionada" />
+                                <Button fx:id="eliminarDireccionButton" disable="true" onAction="#handleEliminarDireccion" style="-fx-base: #f44336;" text="Eliminar" textFill="WHITE" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+        <Label fx:id="messageLabel" layoutX="25.0" layoutY="465.0" prefWidth="550.0" textFill="#008f04" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<!--
+    El fx:controller vincula este archivo FXML con su clase controladora.
+    Asegúrate de que la ruta sea la correcta según la estructura de tu proyecto.
+-->
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.LoginController">
+
+    <!-- Panel de Inicio de Sesión (Visible por defecto) -->
+    <AnchorPane fx:id="loginPane" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0">
+        <children>
+            <Label layoutX="78.0" layoutY="14.0" text="Iniciar Sesión">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="80.0" text="Correo Electrónico:" />
+            <TextField fx:id="emailField" layoutX="25.0" layoutY="100.0" prefWidth="250.0" promptText="ejemplo@correo.com" />
+
+            <Label layoutX="25.0" layoutY="140.0" text="Contraseña:" />
+            <PasswordField fx:id="passwordField" layoutX="25.0" layoutY="160.0" prefWidth="250.0" />
+
+            <Button fx:id="loginButton" layoutX="106.0" layoutY="210.0" onAction="#handleLogin" prefWidth="90.0" text="Ingresar" />
+
+            <Hyperlink layoutX="57.0" layoutY="250.0" onAction="#switchToRegister" text="¿No tienes cuenta? Regístrate aquí" />
+
+            <Label fx:id="loginMessageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="280.0" prefWidth="250.0" textFill="RED" />
+        </children>
+    </AnchorPane>
+
+    <!-- Panel de Registro (Oculto por defecto) -->
+    <AnchorPane fx:id="registerPane" layoutX="150.0" layoutY="25.0" prefHeight="350.0" prefWidth="300.0" visible="false">
+        <children>
+            <Label layoutX="22.0" layoutY="14.0" text="Registro de Nuevo Usuario">
+                <font>
+                    <Font name="System Bold" size="20.0" />
+                </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="60.0" text="Nombre Completo:" />
+            <TextField fx:id="registerNameField" layoutX="25.0" layoutY="80.0" prefWidth="250.0" />
+
+            <Label layoutX="25.0" layoutY="120.0" text="Correo Electrónico:" />
+            <TextField fx:id="registerEmailField" layoutX="25.0" layoutY="140.0" prefWidth="250.0" />
+
+            <Label layoutX="25.0" layoutY="180.0" text="Teléfono:" />
+            <TextField fx:id="registerPhoneField" layoutX="25.0" layoutY="200.0" prefWidth="250.0" />
+
+            <Label layoutX="25.0" layoutY="240.0" text="Contraseña:" />
+            <PasswordField fx:id="registerPasswordField" layoutX="25.0" layoutY="260.0" prefWidth="250.0" />
+
+            <Button fx:id="registerButton" layoutX="105.0" layoutY="300.0" onAction="#handleRegister" prefWidth="90.0" text="Registrarse" />
+
+            <Hyperlink layoutX="67.0" layoutY="330.0" onAction="#switchToLogin" text="¿Ya tienes cuenta? Inicia sesión" />
+
+            <Label fx:id="registerMessageLabel" alignment="CENTER" layoutX="25.0" layoutY="360.0" prefWidth="250.0" textFill="RED" />
+        </children>
+    </AnchorPane>
+</AnchorPane>

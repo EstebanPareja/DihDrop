@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.CreateShipmentController">
+    <children>
+        <Label layoutX="26.0" layoutY="22.0" text="Crear Nuevo Envío">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+
+        <VBox layoutX="26.0" layoutY="70.0" prefWidth="500.0" spacing="15.0">
+            <children>
+                <!-- SECCIÓN DE ORIGEN -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Dirección de Origen">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <children>
+                                <TextField fx:id="origenCalleField" HBox.hgrow="ALWAYS" promptText="Calle y Número" />
+                                <TextField fx:id="origenCiudadField" prefWidth="150.0" promptText="Ciudad" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <!-- SECCIÓN DE DESTINO -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Dirección de Destino">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <children>
+                                <TextField fx:id="destinoCalleField" HBox.hgrow="ALWAYS" promptText="Calle y Número" />
+                                <TextField fx:id="destinoCiudadField" prefWidth="150.0" promptText="Ciudad" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- SECCIÓN DE PAQUETE -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Detalles del Paquete">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <Label text="Peso (kg):" />
+                                <TextField fx:id="pesoField" prefWidth="100.0" promptText="Ej: 5.5" />
+                                <Label text="Volumen (m³):" />
+                                <TextField fx:id="volumenField" prefWidth="100.0" promptText="Ej: 0.1" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <!-- SECCIÓN DE SERVICIOS ADICIONALES -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Servicios Adicionales">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="20.0">
+                            <children>
+                                <CheckBox fx:id="seguroCheck" text="Seguro" />
+                                <CheckBox fx:id="fragilCheck" text="Manejo Frágil" />
+                                <CheckBox fx:id="firmaCheck" text="Firma Requerida" />
+                            </children>
+                            <padding>
+                                <Insets top="5.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- SECCIÓN DE COTIZACIÓN -->
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <children>
+                        <Button fx:id="cotizarButton" onAction="#handleCotizar" prefHeight="35.0" text="Cotizar Envío" />
+                        <Label text="Costo Estimado:">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="costoLabel" text="\$0.00">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <HBox alignment="CENTER_RIGHT" layoutX="26.0" layoutY="540.0" prefWidth="500.0" spacing="15.0">
+            <children>
+                <Label fx:id="messageLabel" alignment="CENTER" prefWidth="250.0" textFill="RED" />
+                <Button fx:id="cancelarButton" onAction="#handleCancelar" prefHeight="35.0" style="-fx-base: #f44336;" text="Cancelar" textFill="WHITE" />
+                <Button fx:id="confirmarButton" disable="true" onAction="#handleConfirmarEnvio" prefHeight="35.0" prefWidth="160.0" style="-fx-base: #4CAF50;" text="Confirmar y Crear Envío" textFill="WHITE" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.ShipmentDetailsController">
+    <children>
+        <VBox layoutX="25.0" layoutY="25.0" prefWidth="400.0" spacing="15.0">
+            <children>
+                <Label text="Detalles del Envío">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+
+                <GridPane hgap="10.0" vgap="8.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="280.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="ID de Envío:">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="idLabel" text="[ID]" GridPane.columnIndex="1" />
+
+                        <Label text="Estado Actual:" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="estadoLabel" text="[Estado]" textFill="#007bff" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+
+                        <Label text="Fecha de Creación:" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="fechaCreacionLabel" text="[Fecha]" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                        <Label text="Repartidor Asignado:" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="repartidorLabel" text="[Repartidor]" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                        <Label text="Fecha Entrega Estimada:" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="fechaEstimadaLabel" text="[Fecha Estimada]" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    </children>
+                </GridPane>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- Detalles de Origen, Destino y Paquete -->
+                <GridPane hgap="10.0" vgap="8.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="120.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="280.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Origen:">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="origenLabel" text="[Origen]" GridPane.columnIndex="1" />
+                        <Label text="Destino:" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="destinoLabel" text="[Destino]" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Paquete:" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="paqueteLabel" text="[Peso y Volumen]" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
+
+                <Separator prefWidth="200.0" />
+
+                <!-- Costos y Servicios -->
+                <Label text="Desglose de Costos">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="costosArea" editable="false" prefHeight="100.0" prefWidth="200.0" wrapText="true" />
+
+            </children>
+        </VBox>
+        <Button fx:id="cerrarButton" layoutX="361.0" layoutY="501.0" onAction="#handleCerrar" prefHeight="30.0" text="Cerrar" />
+    </children>
+</AnchorPane>

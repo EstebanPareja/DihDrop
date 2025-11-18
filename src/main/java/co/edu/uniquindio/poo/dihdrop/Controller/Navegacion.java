@@ -11,14 +11,13 @@ import java.io.IOException;
 public class Navegacion {
 
     // Rutas a los archivos FXML (Asegúrate de que coincidan con tu estructura de carpetas)
-    private static final String RUTA_VISTAS = "/co/edu/uniquindio/poo/dhidrop/";
-    private static final String VISTA_LOGIN = RUTA_VISTAS + "LoginVista.fxml";
-    private static final String VISTA_DASHBOARD = RUTA_VISTAS + "MainDashboardVista.fxml";
-    private static final String VISTA_CREAR_ENVIO = RUTA_VISTAS + "CreateShipmentVista.fxml";
-    private static final String VISTA_HISTORIAL = RUTA_VISTAS + "ShipmentHistoryVista.fxml";
-    private static final String VISTA_DETALLES = RUTA_VISTAS + "ShipmentDetailsVista.fxml";
-    private static final String VISTA_PERFIL = RUTA_VISTAS + "ProfileManagementVista.fxml";
 
+    private static final String VISTA_LOGIN = "/LoginVista.fxml";
+    private static final String VISTA_DASHBOARD = "/MainDashboardVista.fxml";
+    private static final String VISTA_CREAR_ENVIO = "/CreateShipmentVista.fxml";
+    private static final String VISTA_HISTORIAL = "/ShipmentHistoryVista.fxml";
+    private static final String VISTA_DETALLES = "/ShipmentDetailsVista.fxml";
+    private static final String VISTA_PERFIL = "/ProfileManagementVista.fxml";
     /**
      * Abre la ventana de Login. Se usa al iniciar la app o al cerrar sesión.
      */

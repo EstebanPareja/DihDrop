@@ -50,7 +50,7 @@ public class MainDashboardController {
     private void cargarEnviosRecientes() {
         GestorEnvios gestor = GestorEnvios.getInstancia();
         gestor.setTarifaStrategy(new CalculoTarifaBasico());
-
+        System.out.println("Total de envíos vistos desde Dashboard: " + gestor.getTodosLosEnvios().size());
         if (gestor.getTodosLosEnvios().isEmpty()) {
             Direccion d1 = new Direccion("D1", "Oficina", "Calle Falsa 123", "Ciudad", "0,0");
             Direccion d2 = new Direccion("D2", "Bodega", "Avenida Siempre Viva 742", "Ciudad", "1,1");
@@ -58,18 +58,15 @@ public class MainDashboardController {
             gestor.crearEnvio(this.usuarioActual, d2, d1, 2.0, 0.05);
         }
 
-        // Esta línea ahora siempre obtendrá la lista más actualizada del gestor.
-        ObservableList<Envio> envios = FXCollections.observableArrayList(gestor.getTodosLosEnvios());
-        enviosTableView.setItems(envios);
+            // Esta línea ahora siempre obtendrá la lista más actualizada del gestor.
+            ObservableList<Envio> envios = FXCollections.observableArrayList(gestor.getTodosLosEnvios());
+            enviosTableView.setItems(envios);
     }
 
     @FXML
     void handleCrearEnvio(ActionEvent event) {
         Navegacion.abrirCrearEnvio(this.usuarioActual);
 
-        // --- ESTA ES LA LÍNEA QUE CORRIGE EL PROBLEMA ---
-        // Al volver de la ventana de creación, llamamos de nuevo al método que carga
-        // los datos en la tabla, asegurando que se muestre la información más reciente.
         cargarEnviosRecientes();
     }
 

@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
 
 public class GestorEnvios {
 
-    // --- Implementación del patrón Singleton ---
+
+    /**
+     * Patrón Singleton
+     */
     private static GestorEnvios instancia;
 
     private List<Envio> envios;
@@ -27,9 +30,12 @@ public class GestorEnvios {
         }
         return instancia;
     }
-    // --- Fin del Singleton ---
 
 
+    /**
+     *
+     * @param strategy
+     */
     public void setTarifaStrategy(CalculoTarifaStrategy strategy) {
         this.tarifaStrategy = strategy;
     }

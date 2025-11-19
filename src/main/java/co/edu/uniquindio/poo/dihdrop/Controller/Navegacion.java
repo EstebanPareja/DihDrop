@@ -12,14 +12,17 @@ import java.io.IOException;
 
 public class Navegacion {
 
-    // Rutas a los archivos FXML (en la RAÍZ de resources)
-    private static final String VISTA_LOGIN       = "/LoginVista.fxml";
-    private static final String VISTA_DASHBOARD   = "/MainDashboardVista.fxml";
-    private static final String VISTA_CREAR_ENVIO = "/CreateShipmentVista.fxml";
-    private static final String VISTA_HISTORIAL   = "/ShipmentHistoryVista.fxml";
-    private static final String VISTA_DETALLES    = "/ShipmentDetailsVista.fxml";
-    private static final String VISTA_PERFIL      = "/ProfileManagementVista.fxml";
+    // Rutas a los archivos FXML (Asegúrate de que coincidan con tu estructura de carpetas)
 
+    private static final String VISTA_LOGIN = "/LoginVista.fxml";
+    private static final String VISTA_DASHBOARD = "/MainDashboardVista.fxml";
+    private static final String VISTA_CREAR_ENVIO = "/CreateShipmentVista.fxml";
+    private static final String VISTA_HISTORIAL = "/ShipmentHistoryVista.fxml";
+    private static final String VISTA_DETALLES = "/ShipmentDetailsVista.fxml";
+    private static final String VISTA_PERFIL = "/ProfileManagementVista.fxml";
+    /**
+     * Abre la ventana de Login. Se usa al iniciar la app o al cerrar sesión.
+     */
     public static void abrirLogin(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_LOGIN));

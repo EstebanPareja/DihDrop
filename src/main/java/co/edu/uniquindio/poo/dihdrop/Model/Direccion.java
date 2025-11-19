@@ -8,6 +8,14 @@ public class Direccion {
     private String ciudad;
     private String coordenadas; // Simuladas
 
+    /**
+     * Constructor de la clase direccion
+     * @param idDireccion
+     * @param alias
+     * @param calle
+     * @param ciudad
+     * @param coordenadas
+     */
     public Direccion(String idDireccion, String alias, String calle, String ciudad, String coordenadas) {
         this.idDireccion = idDireccion;
         this.alias = alias;
@@ -16,7 +24,7 @@ public class Direccion {
         this.coordenadas = coordenadas;
     }
 
-    // --- Getters y Setters ---
+    ///  Getters y Setters
 
     public String getIdDireccion() {
         return idDireccion;

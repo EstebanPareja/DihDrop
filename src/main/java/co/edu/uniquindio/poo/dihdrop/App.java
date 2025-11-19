@@ -1,6 +1,5 @@
 package co.edu.uniquindio.poo.dihdrop;
 
-import co.edu.uniquindio.poo.dihdrop.Model.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

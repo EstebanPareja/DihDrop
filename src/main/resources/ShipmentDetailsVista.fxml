@@ -121,6 +121,13 @@
                 </Label>
                 <TextArea fx:id="costosArea" editable="false" prefHeight="100.0" prefWidth="200.0" wrapText="true" />
 
+
+
+                <Button text="Asignar Repartidor" fx:id="asignarButton" onAction="#handleAsignar"/>
+                <Button text="Marcar En Ruta" fx:id="enRutaButton" onAction="#handleEnRuta"/>
+                <Button text="Entregar" fx:id="entregarButton" onAction="#handleEntregar"/>
+                <Button text="Reportar Incidencia" fx:id="incidenciaButton" onAction="#handleIncidencia"/>
+
             </children>
         </VBox>
         <Button fx:id="cerrarButton" layoutX="361.0" layoutY="501.0" onAction="#handleCerrar" prefHeight="30.0" text="Cerrar" />

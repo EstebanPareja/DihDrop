@@ -24,6 +24,8 @@ public class ShipmentDetailsController {
     @FXML private Label paqueteLabel;
     @FXML private TextArea costosArea;
     @FXML private Button cerrarButton;
+    private Envio envio;
+
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
@@ -34,6 +36,7 @@ public class ShipmentDetailsController {
      * @param envio El objeto Envio cuyos detalles se van a mostrar.
      */
     public void initData(Envio envio) {
+        this.envio = envio;
         if (envio == null) {
             return;
         }
@@ -56,6 +59,31 @@ public class ShipmentDetailsController {
         // Construir el desglose de costos
         buildCostosText(envio);
     }
+
+    @FXML
+    void handleAsignar(ActionEvent e){
+        envio.asignarRepartidorState(new Repartidor("R1","Pedro","123","111","Zona"));
+        reload();
+    }
+
+    @FXML
+    void handleEnRuta(ActionEvent e){
+        envio.salirEnRuta();
+        reload();
+    }
+
+    @FXML
+    void handleEntregar(ActionEvent e){
+        envio.marcarEntregado();
+        reload();
+    }
+
+    @FXML
+    void handleIncidencia(ActionEvent e){
+        envio.marcarIncidencia("Retraso por clima");
+        reload();
+    }
+
 
     /**
      * Construye el texto para el área de desglose de costos.
@@ -95,5 +123,14 @@ public class ShipmentDetailsController {
     void handleCerrar(ActionEvent event) {
         Stage stage = (Stage) cerrarButton.getScene().getWindow();
         stage.close();
+    }
+    private void reload() {
+        estadoLabel.setText(envio.getEstado().getDescripcion());
+
+        Repartidor r = envio.getRepartidor();
+        repartidorLabel.setText(r != null ? r.getNombre() : "Pendiente de asignación");
+
+        fechaEstimadaLabel.setText(formatDate(envio.getFechaEstimadaEntrega()));
+        buildCostosText(envio);
     }
 }

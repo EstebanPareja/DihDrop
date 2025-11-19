@@ -3,11 +3,10 @@ package co.edu.uniquindio.poo.dihdrop.Controller;
 import co.edu.uniquindio.poo.dihdrop.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.time.LocalDateTime;
 
 public class CreateShipmentController {
 
@@ -23,6 +22,9 @@ public class CreateShipmentController {
     @FXML private Label costoLabel;
     @FXML private Button confirmarButton;
     @FXML private Label messageLabel;
+    @FXML private ComboBox<String> metodoPagoCombo;
+    @FXML private Label estadoPagoLabel;
+
 
     private Usuario usuarioActual;
     private double costoCalculado = 0.0;
@@ -110,6 +112,36 @@ public class CreateShipmentController {
         System.out.println("Envío creado exitosamente con ID: " + nuevoEnvio.getIdEnvio());
         messageLabel.setText("¡Envío creado con éxito!");
 
+        String metodo = metodoPagoCombo.getValue();
+
+        Pago pago = new Pago(
+                "P-" + nuevoEnvio.getIdEnvio(),
+                costoCalculado,
+                LocalDateTime.now(),
+                metodo,
+                false,
+                nuevoEnvio
+        );
+
+// --> FACTORY
+        ProcesadorPago procesador = PagoFactory.crearProcesador(metodo);
+
+// --> ADAPTER
+        boolean aprobado = procesador.procesar(pago);
+        pago.setAprobado(aprobado);
+
+        if (!aprobado) {
+            estadoPagoLabel.setText("Pago rechazado");
+            return;
+        }
+        estadoPagoLabel.setText("Pago aprobado");
+
+// Notificación si quieres
+        nuevoEnvio.agregarObserver(new NotificacionEmail());
+        nuevoEnvio.agregarObserver(new NotificacionSMS());
+
+
+
         // Cerrar la ventana después de crear el envío
         cerrarVentana();
     }
@@ -135,6 +167,11 @@ public class CreateShipmentController {
         }
         return true;
     }
+
+
+
+
+
 
     /**
      * Método de utilidad para cerrar la ventana actual.

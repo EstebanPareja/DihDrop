@@ -30,7 +30,7 @@
 
             <Button fx:id="loginButton" layoutX="106.0" layoutY="210.0" onAction="#handleLogin" prefWidth="90.0" text="Ingresar" />
 
-            <Hyperlink layoutX="57.0" layoutY="250.0" onAction="#switchToRegister" text="¿No tienes cuenta? Regístrate aquí" />
+
 
             <Label fx:id="loginMessageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="280.0" prefWidth="250.0" textFill="RED" />
         </children>

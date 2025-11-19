@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.AdministradorController">
+
+    <children>
+
+        <MenuBar layoutY="0.0" prefWidth="900.0">
+            <menus>
+                <Menu text="Cuenta">
+                    <items>
+                        <MenuItem text="Cerrar sesión" onAction="#handleCerrarSesion"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+
+        <VBox layoutY="30.0" spacing="10.0" prefWidth="900.0">
+            <padding>
+                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+            </padding>
+            <children>
+
+                <Label fx:id="adminNombreLabel" text="Administrador: [Nombre]">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+
+                <HBox spacing="10.0">
+                    <children>
+
+                        <!-- Panel Usuarios -->
+                        <VBox spacing="5.0" prefWidth="440.0">
+                            <children>
+                                <Label text="Gestión de Usuarios">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </Label>
+
+                                <TableView fx:id="usuariosTableView" prefHeight="200.0">
+                                    <columns>
+                                        <TableColumn fx:id="usuarioIdColumn" text="ID" prefWidth="80.0"/>
+                                        <TableColumn fx:id="usuarioNombreColumn" text="Nombre" prefWidth="140.0"/>
+                                        <TableColumn fx:id="usuarioCorreoColumn" text="Correo" prefWidth="140.0"/>
+                                        <TableColumn fx:id="usuarioTelefonoColumn" text="Teléfono" prefWidth="80.0"/>
+                                    </columns>
+                                </TableView>
+
+                                <GridPane hgap="5.0" vgap="5.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints/>
+                                        <RowConstraints/>
+                                        <RowConstraints/>
+                                        <RowConstraints/>
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="usuarioIdField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                        <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="usuarioNombreField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                        <Label text="Correo:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="usuarioCorreoField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                        <Label text="Teléfono:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="usuarioTelefonoField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                                    </children>
+                                </GridPane>
+
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <Button text="Crear Usuario" onAction="#handleCrearUsuario"/>
+                                        <Button text="Eliminar Usuario" onAction="#handleEliminarUsuario"/>
+                                    </children>
+                                </HBox>
+
+                                <Label fx:id="usuarioMensajeLabel" textFill="red"/>
+
+                            </children>
+                        </VBox>
+
+                        <!-- Panel Repartidores -->
+                        <VBox spacing="5.0" prefWidth="440.0">
+                            <children>
+                                <Label text="Gestión de Repartidores">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </Label>
+
+                                <TableView fx:id="repartidoresTableView" prefHeight="200.0">
+                                    <columns>
+                                        <TableColumn fx:id="repartidorIdColumn" text="ID" prefWidth="60.0"/>
+                                        <TableColumn fx:id="repartidorNombreColumn" text="Nombre" prefWidth="100.0"/>
+                                        <TableColumn fx:id="repartidorDocumentoColumn" text="Documento" prefWidth="100.0"/>
+                                        <TableColumn fx:id="repartidorTelefonoColumn" text="Teléfono" prefWidth="80.0"/>
+                                        <TableColumn fx:id="repartidorEstadoColumn" text="Estado" prefWidth="80.0"/>
+                                        <TableColumn fx:id="repartidorZonaColumn" text="Zona" prefWidth="80.0"/>
+                                    </columns>
+                                </TableView>
+
+                                <GridPane hgap="5.0" vgap="5.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT"/>
+                                        <ColumnConstraints hgrow="ALWAYS"/>
+                                    </columnConstraints>
+                                    <children>
+                                        <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="repartidorIdField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                                        <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="repartidorNombreField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                                        <Label text="Documento:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="repartidorDocumentoField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                                        <Label text="Teléfono:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="repartidorTelefonoField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                                        <Label text="Zona:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="repartidorZonaField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                                        <Label text="Estado:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                                        <ComboBox fx:id="repartidorEstadoCombo" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                                    </children>
+                                </GridPane>
+
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <Button text="Crear Repartidor" onAction="#handleCrearRepartidor"/>
+                                        <Button text="Cambiar Disponibilidad" onAction="#handleCambiarDisponibilidad"/>
+                                    </children>
+                                </HBox>
+
+                                <Label fx:id="repartidorMensajeLabel" textFill="red"/>
+
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <!-- Panel Envíos -->
+                <VBox spacing="5.0">
+                    <children>
+                        <HBox spacing="10.0">
+                            <children>
+                                <Label text="Envíos registrados">
+                                    <font>
+                                        <Font size="16.0"/>
+                                    </font>
+                                </Label>
+                                <Button text="Refrescar" onAction="#handleRefrescarEnvios"/>
+                            </children>
+                        </HBox>
+
+                        <TableView fx:id="enviosTableView" prefHeight="200.0">
+                            <columns>
+                                <TableColumn fx:id="envioIdColumn" text="ID Envío" prefWidth="120.0"/>
+                                <TableColumn fx:id="envioEstadoColumn" text="Estado" prefWidth="120.0"/>
+                                <TableColumn fx:id="envioUsuarioColumn" text="Usuario" prefWidth="200.0"/>
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+
+    </children>
+</AnchorPane>

@@ -6,10 +6,19 @@ public class Pago {
     private String idPago;
     private double monto;
     private LocalDateTime fecha;
-    private String metodo;      // "TARJETA", "PSE", "NEQUI"
+    private String metodo;
     private boolean aprobado;
     private Envio envioAsociado;
 
+    /**
+     * Constructor de lq clase pago
+     * @param idPago
+     * @param monto
+     * @param fecha
+     * @param metodo
+     * @param aprobado
+     * @param envioAsociado
+     */
     public Pago(String idPago, double monto, LocalDateTime fecha, String metodo, boolean aprobado, Envio envioAsociado) {
         this.idPago = idPago;
         this.monto = monto;
@@ -18,6 +27,8 @@ public class Pago {
         this.aprobado = aprobado;
         this.envioAsociado = envioAsociado;
     }
+
+    ///  Getters y setters
 
     public String getIdPago() {
         return idPago;

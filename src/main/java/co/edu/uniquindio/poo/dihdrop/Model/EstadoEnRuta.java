@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.dihdrop.Model;
 
+/**
+ * Implementación concreta para un envio en ruta del patrón State
+ */
 public class EstadoEnRuta implements EstadoEnvioState {
 
     @Override

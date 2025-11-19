@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.dihdrop.Model;
 
+/**
+ * Implementación concreta para un envio solicitado del patrón State
+ */
 public class EstadoSolicitado implements EstadoEnvioState {
 
     @Override

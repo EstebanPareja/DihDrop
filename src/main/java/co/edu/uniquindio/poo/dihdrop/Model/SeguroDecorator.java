@@ -1,5 +1,9 @@
 package co.edu.uniquindio.poo.dihdrop.Model;
 
+/**
+ * Agregación del servicio seguro mediante patrón decorator
+ */
+
 public class SeguroDecorator extends ServicioAdicional {
 
     private final double valorAsegurado;
@@ -8,9 +12,12 @@ public class SeguroDecorator extends ServicioAdicional {
         this.valorAsegurado = valorAsegurado;
     }
 
+    /**
+     * Metodo para calcular el total del servicio agregado
+     * @return valor agregado
+     */
     @Override
     public double getCostoAdicional() {
-        // El costo del seguro es el 1% del valor asegurado
         return valorAsegurado * 0.01;
     }
 

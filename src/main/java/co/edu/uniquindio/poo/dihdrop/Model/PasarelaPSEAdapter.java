@@ -1,13 +1,16 @@
 package co.edu.uniquindio.poo.dihdrop.Model;
 
-public class PasarelaYAdapter implements ProcesadorPago {
+/**
+ * implementación de un Metodo pago por PSE usando el patron adapter
+ */
+public class PasarelaPSEAdapter implements ProcesadorPago {
 
-    private final PasarelaYSDK sdk = new PasarelaYSDK();
+    private final PasarelaProcesarPSE sdk = new PasarelaProcesarPSE();
 
     @Override
     public boolean procesar(Pago pago) {
         String cuentaSimulada = "CUENTA-12345";
-        System.out.println("[PasarelaYAdapter] Usando Pasarela Y para pago " + pago.getIdPago());
+        System.out.println("[PasarelaPSEAdapter] Usando Pasarela Y para pago " + pago.getIdPago());
 
         int codigo = sdk.crearTransaccionDebito(
                 cuentaSimulada,

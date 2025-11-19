@@ -1,5 +1,9 @@
 package co.edu.uniquindio.poo.dihdrop.Model;
 
+/**
+ * Implementación concreta para un envio con incidencia con del patrón State
+ */
+
 public class EstadoIncidencia implements EstadoEnvioState {
 
     @Override

@@ -11,13 +11,18 @@ public class CalculoTarifaBasico implements CalculoTarifaStrategy {
     private final double precioPorMetroCubico = 50000;
     private final double precioPorKm = 800;
 
+    /**
+     * Metodo para calcular el precio de un envio basico
+     * @param peso
+     * @param volumen
+     * @param distancia
+     * @return costo envio basico
+     */
     @Override
     public double calcular(double peso, double volumen, double distancia) {
         double costoPeso = peso * precioPorKg;
         double costoVolumen = volumen * precioPorMetroCubico;
         double costoDistancia = distancia * precioPorKm;
-
-        // La tarifa es la suma de todos los componentes.
         return costoPeso + costoVolumen + costoDistancia;
     }
 }

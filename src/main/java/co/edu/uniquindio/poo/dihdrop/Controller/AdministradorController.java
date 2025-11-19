@@ -2,9 +2,6 @@ package co.edu.uniquindio.poo.dihdrop.Controller;
 
 import co.edu.uniquindio.poo.dihdrop.Model.Administrador;
 import co.edu.uniquindio.poo.dihdrop.Model.EstadoDisponibilidadRepartidor;
-import co.edu.uniquindio.poo.dihdrop.Model.ReportesFacade;
-import java.util.Map;
-import javafx.scene.control.Alert;
 import co.edu.uniquindio.poo.dihdrop.Model.Envio;
 import co.edu.uniquindio.poo.dihdrop.Model.EstadoEnvio;
 import co.edu.uniquindio.poo.dihdrop.Model.GestorEnvios;
@@ -21,9 +18,12 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+/**
+ * Controlador para la vista del panel de Administrador.
+ * Permite gestionar usuarios, repartidores y visualizar envíos registrados.
+ */
 public class AdministradorController {
 
-    private final ReportesFacade reportesFacade = new ReportesFacade();
     @FXML
     private Label adminNombreLabel;
     @FXML
@@ -59,10 +59,6 @@ public class AdministradorController {
     @FXML
     private TableColumn<Envio, String> envioUsuarioColumn;
     @FXML
-    private ComboBox<EstadoEnvio> envioEstadoCombo;
-    @FXML
-    private Label envioMensajeLabel;
-    @FXML
     private TextField usuarioIdField;
     @FXML
     private TextField usuarioNombreField;
@@ -92,7 +88,10 @@ public class AdministradorController {
     private ObservableList<Repartidor> repartidoresObservable;
     private ObservableList<Envio> enviosObservable;
 
-
+    /**
+     * Metodo de inicialización del controlador.
+     * Configura columnas de tablas y combos.
+     */
     @FXML
     public void initialize() {
 
@@ -100,12 +99,14 @@ public class AdministradorController {
         usuarioNombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
         usuarioCorreoColumn.setCellValueFactory(new PropertyValueFactory<>("correoElectronico"));
         usuarioTelefonoColumn.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
         repartidorIdColumn.setCellValueFactory(new PropertyValueFactory<>("idRepartidor"));
         repartidorNombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         repartidorDocumentoColumn.setCellValueFactory(new PropertyValueFactory<>("documento"));
         repartidorTelefonoColumn.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         repartidorEstadoColumn.setCellValueFactory(new PropertyValueFactory<>("disponibilidad"));
         repartidorZonaColumn.setCellValueFactory(new PropertyValueFactory<>("zonaCobertura"));
+
         envioIdColumn.setCellValueFactory(new PropertyValueFactory<>("idEnvio"));
         envioEstadoColumn.setCellValueFactory(new PropertyValueFactory<>("estado"));
         envioUsuarioColumn.setCellValueFactory(cellData ->
@@ -115,6 +116,7 @@ public class AdministradorController {
                                 : "Sin usuario"
                 )
         );
+
         usuariosObservable = FXCollections.observableArrayList();
         repartidoresObservable = FXCollections.observableArrayList();
         enviosObservable = FXCollections.observableArrayList();
@@ -122,18 +124,15 @@ public class AdministradorController {
         usuariosTableView.setItems(usuariosObservable);
         repartidoresTableView.setItems(repartidoresObservable);
         enviosTableView.setItems(enviosObservable);
+
         repartidorEstadoCombo.setItems(FXCollections.observableArrayList(EstadoDisponibilidadRepartidor.values()));
         usuarioMensajeLabel.setText("");
         repartidorMensajeLabel.setText("");
-        envioEstadoCombo.setItems(FXCollections.observableArrayList(EstadoEnvio.values()));
-        if (envioMensajeLabel != null) {
-            envioMensajeLabel.setText("");
-        }
     }
 
     /**
      * Metodo para inicializar los datos del administrador
-     * @param administrador
+     * @param administrador administrador autenticado
      */
     public void initData(Administrador administrador) {
         this.administradorActual = administrador;
@@ -150,7 +149,7 @@ public class AdministradorController {
 
     /**
      * Metodo para manejar la creación de un nuevo usuario
-     * @param event
+     * @param event evento de la interfaz
      */
     @FXML
     public void handleCrearUsuario(ActionEvent event) {
@@ -178,20 +177,10 @@ public class AdministradorController {
             usuarioMensajeLabel.setText("Ya existe un usuario con ese ID.");
         }
     }
-    /**
-     * Metodo para volver al login desde cualquier vista
-     * @param event evento de la interfaz
-     */
-    @FXML
-    public void handleAtras(ActionEvent event) {
-        Stage stageActual = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        Navegacion.abrirLogin(stageActual);
-    }
-
 
     /**
      * Metodo para manejar la eliminación del usuario seleccionado
-     * @param event
+     * @param event evento de la interfaz
      */
     @FXML
     public void handleEliminarUsuario(ActionEvent event) {
@@ -212,7 +201,7 @@ public class AdministradorController {
 
     /**
      * Metodo para manejar la creación de un nuevo repartidor
-     * @param event
+     * @param event evento de la interfaz
      */
     @FXML
     public void handleCrearRepartidor(ActionEvent event) {
@@ -249,7 +238,7 @@ public class AdministradorController {
 
     /**
      * Metodo para manejar el cambio de disponibilidad del repartidor seleccionado
-     * @param event
+     * @param event evento de la interfaz
      */
     @FXML
     public void handleCambiarDisponibilidad(ActionEvent event) {
@@ -279,74 +268,64 @@ public class AdministradorController {
 
     /**
      * Metodo para recargar la lista de envíos desde el GestorEnvios
-     * @param event
+     * @param event evento de la interfaz
      */
     @FXML
     public void handleRefrescarEnvios(ActionEvent event) {
         List<Envio> envios = GestorEnvios.getInstancia().getTodosLosEnvios();
         enviosObservable.setAll(envios);
     }
-    /**
-     * Metodo para cambiar el estado del envío seleccionado en la tabla.
-     * @param event
-     */
-    @FXML
-    public void handleCambiarEstadoEnvio(ActionEvent event) {
-        Envio seleccionado = enviosTableView.getSelectionModel().getSelectedItem();
-        EstadoEnvio nuevoEstado = envioEstadoCombo.getValue();
-        if (seleccionado == null) {
-            envioMensajeLabel.setText("Seleccione un envío de la tabla.");
-            return;
-        }
-        if (nuevoEstado == null) {
-            envioMensajeLabel.setText("Seleccione un estado en el combo.");
-            return;
-        }
-        GestorEnvios gestor = GestorEnvios.getInstancia();
-        gestor.actualizarEstadoEnvio(seleccionado.getIdEnvio(), nuevoEstado);
-        enviosObservable.setAll(gestor.getTodosLosEnvios());
-        enviosTableView.refresh();
-
-        envioMensajeLabel.setText("Estado actualizado a: " + nuevoEstado.getDescripcion());
-    }
-
-    /**
-     * Metodo para mostrar un reporte básico usando el ReportesFacade.
-     */
-    @FXML
-    public void handleVerReportes(ActionEvent event) {
-        long entregados = reportesFacade.contarEnviosEntregados();
-        double ingresoTotal = reportesFacade.calcularIngresoTotal();
-        Map<String, Long> incidenciasCiudad = reportesFacade.incidenciasPorCiudad();
-
-        StringBuilder contenido = new StringBuilder();
-        contenido.append("Envíos entregados: ").append(entregados).append("\n");
-        contenido.append("Ingreso total: $").append(String.format("%.2f", ingresoTotal)).append("\n");
-        contenido.append("Incidencias por ciudad:\n");
-
-        if (incidenciasCiudad.isEmpty()) {
-            contenido.append("  - No hay incidencias registradas.\n");
-        } else {
-            incidenciasCiudad.forEach((ciudad, cantidad) ->
-                    contenido.append("  - ").append(ciudad).append(": ").append(cantidad).append("\n")
-            );
-        }
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Reporte de envíos");
-        alert.setHeaderText("Resumen general de la operación");
-        alert.setContentText(contenido.toString());
-        alert.showAndWait();
-    }
-
 
     /**
      * Metodo para cerrar sesión y volver a la vista de Login
-     * @param event
+     * @param event evento de la interfaz
      */
     @FXML
     public void handleCerrarSesion(ActionEvent event) {
         Stage stageActual = (Stage) adminNombreLabel.getScene().getWindow();
         Navegacion.abrirLogin(stageActual);
+    }
+
+    /**
+     * Metodo para asignar un repartidor al envío seleccionado.
+     * El administrador debe seleccionar un envío en la tabla de envíos
+     * y un repartidor en la tabla de repartidores.
+     * @param event evento de la interfaz
+     */
+    @FXML
+    public void handleAsignarRepartidor(ActionEvent event) {
+        Envio envioSeleccionado = enviosTableView.getSelectionModel().getSelectedItem();
+        Repartidor repartidorSeleccionado = repartidoresTableView.getSelectionModel().getSelectedItem();
+
+        if (envioSeleccionado == null) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Asignación de repartidor");
+            alerta.setHeaderText("Ningún envío seleccionado");
+            alerta.setContentText("Seleccione un envío en la tabla para poder asignarle un repartidor.");
+            alerta.showAndWait();
+            return;
+        }
+
+        if (repartidorSeleccionado == null) {
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Asignación de repartidor");
+            alerta.setHeaderText("Ningún repartidor seleccionado");
+            alerta.setContentText("Seleccione un repartidor en la tabla para poder asignarlo al envío.");
+            alerta.showAndWait();
+            return;
+        }
+
+        GestorEnvios gestor = GestorEnvios.getInstancia();
+        gestor.asignarRepartidor(envioSeleccionado.getIdEnvio(), repartidorSeleccionado);
+
+        enviosObservable.setAll(gestor.getTodosLosEnvios());
+        enviosTableView.refresh();
+
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Asignación de repartidor");
+        alerta.setHeaderText("Asignación exitosa");
+        alerta.setContentText("El repartidor " + repartidorSeleccionado.getNombre() +
+                " ha sido asignado al envío " + envioSeleccionado.getIdEnvio() + ".");
+        alerta.showAndWait();
     }
 }

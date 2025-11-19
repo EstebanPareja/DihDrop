@@ -23,7 +23,6 @@ public class ProfileManagementController {
 
     @FXML
     public void initialize() {
-        // Añadir un listener a la selección de la lista para habilitar/deshabilitar botones
         direccionesListView.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
                     boolean isItemSelected = newSelection != null;
@@ -63,20 +62,16 @@ public class ProfileManagementController {
      */
     @FXML
     void handleGuardarCambios(ActionEvent event) {
-        // Lógica de validación
         if (nombreField.getText().isEmpty() || correoField.getText().isEmpty() || telefonoField.getText().isEmpty()) {
             messageLabel.setText("Todos los campos personales son obligatorios.");
             return;
         }
 
-        // Actualizar el objeto Usuario en memoria
         usuarioActual.actualizarPerfil(
                 nombreField.getText(),
                 correoField.getText(),
                 telefonoField.getText()
         );
-
-        // TODO: En un sistema real, aquí se llamaría a GestorUsuarios.getInstancia().actualizarUsuario(usuarioActual);
 
         messageLabel.setText("¡Información personal actualizada con éxito!");
         System.out.println("Perfil actualizado para: " + usuarioActual.getNombreCompleto());
@@ -87,7 +82,6 @@ public class ProfileManagementController {
      */
     @FXML
     void handleAnadirDireccion(ActionEvent event) {
-        // Usar un TextInputDialog para obtener el alias de la nueva dirección
         TextInputDialog dialog = new TextInputDialog("Casa");
         dialog.setTitle("Añadir Nueva Dirección");
         dialog.setHeaderText("Añade un alias y los detalles de tu nueva dirección.");
@@ -95,7 +89,6 @@ public class ProfileManagementController {
 
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(alias -> {
-            // Simulación de los otros campos
             String calle = "Calle Nueva " + (int)(Math.random()*100);
             String ciudad = "Ciudad Principal";
             String id = "DIR-" + UUID.randomUUID().toString().substring(0, 4);
@@ -103,7 +96,6 @@ public class ProfileManagementController {
             Direccion nuevaDireccion = new Direccion(id, alias, calle, ciudad, "0,0");
             usuarioActual.agregarDireccion(nuevaDireccion);
 
-            // Refrescar la lista
             populateDireccionesList();
             messageLabel.setText("Dirección '" + alias + "' añadida.");
         });
@@ -149,7 +141,6 @@ public class ProfileManagementController {
         Direccion seleccionada = direccionesListView.getSelectionModel().getSelectedItem();
         if (seleccionada == null) return;
 
-        // Diálogo de confirmación
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar Eliminación");
         alert.setHeaderText("¿Estás seguro de que quieres eliminar esta dirección?");

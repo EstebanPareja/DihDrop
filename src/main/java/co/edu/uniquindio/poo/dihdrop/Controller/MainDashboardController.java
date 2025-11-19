@@ -58,7 +58,6 @@ public class MainDashboardController {
             gestor.crearEnvio(this.usuarioActual, d2, d1, 2.0, 0.05);
         }
 
-            // Esta línea ahora siempre obtendrá la lista más actualizada del gestor.
             ObservableList<Envio> envios = FXCollections.observableArrayList(gestor.getTodosLosEnvios());
             enviosTableView.setItems(envios);
     }

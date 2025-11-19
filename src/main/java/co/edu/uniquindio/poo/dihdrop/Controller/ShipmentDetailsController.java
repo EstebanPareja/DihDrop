@@ -41,22 +41,18 @@ public class ShipmentDetailsController {
             return;
         }
 
-        // Poblar la información principal
         idLabel.setText(envio.getIdEnvio());
         estadoLabel.setText(envio.getEstado().getDescripcion());
         fechaCreacionLabel.setText(formatDate(envio.getFechaCreacion()));
         fechaEstimadaLabel.setText(formatDate(envio.getFechaEstimadaEntrega()));
 
-        // Manejar el caso de que el repartidor no esté asignado
         Repartidor repartidor = envio.getRepartidor();
         repartidorLabel.setText(repartidor != null ? repartidor.getNombre() : "Pendiente de asignación");
 
-        // Poblar detalles de direcciones y paquete
         origenLabel.setText(envio.getOrigen().toString());
         destinoLabel.setText(envio.getDestino().toString());
         paqueteLabel.setText(String.format("%.2f kg, %.2f m³", envio.getPeso(), envio.getVolumen()));
 
-        // Construir el desglose de costos
         buildCostosText(envio);
     }
 

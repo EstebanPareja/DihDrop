@@ -67,7 +67,6 @@
 
                 <Separator prefWidth="200.0" />
 
-                <!-- SECCIÓN DE PAQUETE -->
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Detalles del Paquete">
@@ -125,7 +124,6 @@
 
                 <Separator prefWidth="200.0" />
 
-                <!-- SECCIÓN DE COTIZACIÓN -->
                 <HBox alignment="CENTER_LEFT" spacing="20.0">
                     <children>
                         <Button fx:id="cotizarButton" onAction="#handleCotizar" prefHeight="35.0" text="Cotizar Envío" />

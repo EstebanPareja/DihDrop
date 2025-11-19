@@ -8,10 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<!--
-    El fx:controller vincula este archivo FXML con su clase controladora.
-    Asegúrate de que la ruta sea la correcta según la estructura de tu proyecto.
--->
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.LoginController">
 
     <!-- Panel de Inicio de Sesión (Visible por defecto) -->
@@ -36,7 +33,7 @@
         </children>
     </AnchorPane>
 
-    <!-- Panel de Registro (Oculto por defecto) -->
+
     <AnchorPane fx:id="registerPane" layoutX="150.0" layoutY="25.0" prefHeight="350.0" prefWidth="300.0" visible="false">
         <children>
             <Label layoutX="22.0" layoutY="14.0" text="Registro de Nuevo Usuario">

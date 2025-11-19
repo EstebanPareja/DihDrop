@@ -35,8 +35,6 @@ public class CreateShipmentController {
      */
     @FXML
     public void initialize() {
-        // Aseguramos que el gestor tenga una estrategia de cálculo.
-        // En una aplicación real, esto se haría en un punto de arranque central.
         GestorEnvios.getInstancia().setTarifaStrategy(new CalculoTarifaBasico());
     }
 

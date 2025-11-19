@@ -12,8 +12,6 @@ import java.io.IOException;
 
 public class Navegacion {
 
-    // Rutas a los archivos FXML (Asegúrate de que coincidan con tu estructura de carpetas)
-
     private static final String VISTA_LOGIN = "/LoginVista.fxml";
     private static final String VISTA_DASHBOARD = "/MainDashboardVista.fxml";
     private static final String VISTA_CREAR_ENVIO = "/CreateShipmentVista.fxml";

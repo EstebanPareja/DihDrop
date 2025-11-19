@@ -106,7 +106,6 @@
                             </children>
                         </VBox>
 
-                        <!-- Panel Repartidores -->
                         <VBox spacing="5.0" prefWidth="440.0">
                             <children>
                                 <Label text="Gestión de Repartidores">
@@ -167,7 +166,6 @@
                     </children>
                 </HBox>
 
-                <!-- Panel Envíos -->
                 <VBox spacing="5.0">
                     <children>
                         <HBox spacing="10.0">

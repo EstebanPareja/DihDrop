@@ -11,14 +11,11 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-    // --- Componentes FXML del Panel de Login ---
     @FXML private AnchorPane loginPane;
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private Button loginButton;
     @FXML private Label loginMessageLabel;
-
-    // --- Componentes FXML del Panel de Registro ---
     @FXML private AnchorPane registerPane;
     @FXML private TextField registerNameField;
     @FXML private TextField registerEmailField;
@@ -83,7 +80,6 @@ public class LoginController {
 
     @FXML
     void handleRegister(ActionEvent event) {
-        // ... (Esta lógica no necesita cambios por ahora)
         System.out.println("Intento de registro...");
         switchToLogin(event);
     }

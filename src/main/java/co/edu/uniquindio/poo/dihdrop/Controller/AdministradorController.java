@@ -288,9 +288,7 @@ public class AdministradorController {
 
     /**
      * Metodo para asignar un repartidor al envío seleccionado.
-     * El administrador debe seleccionar un envío en la tabla de envíos
-     * y un repartidor en la tabla de repartidores.
-     * @param event evento de la interfaz
+     * @param event
      */
     @FXML
     public void handleAsignarRepartidor(ActionEvent event) {
@@ -315,6 +313,21 @@ public class AdministradorController {
             return;
         }
 
+
+        EstadoDisponibilidadRepartidor disponibilidad = repartidorSeleccionado.getDisponibilidad();
+        if (disponibilidad == EstadoDisponibilidadRepartidor.EN_RUTA ||
+                disponibilidad == EstadoDisponibilidadRepartidor.INACTIVO) {
+
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Asignación de repartidor");
+            alerta.setHeaderText("Repartidor no disponible");
+            alerta.setContentText("No se pueden asignar envíos a un repartidor que está "
+                    + disponibilidad.name().replace("_", " ").toLowerCase() + ".");
+            alerta.showAndWait();
+            return;
+        }
+
+
         GestorEnvios gestor = GestorEnvios.getInstancia();
         gestor.asignarRepartidor(envioSeleccionado.getIdEnvio(), repartidorSeleccionado);
 
@@ -328,4 +341,5 @@ public class AdministradorController {
                 " ha sido asignado al envío " + envioSeleccionado.getIdEnvio() + ".");
         alerta.showAndWait();
     }
+
 }

@@ -33,9 +33,14 @@ public class Envio {
         this.peso = builder.peso;
         this.volumen = builder.volumen;
         this.serviciosAdicionales = builder.serviciosAdicionales;
-
         this.estado = EstadoEnvio.SOLICITADO;
         this.fechaCreacion = LocalDateTime.now();
+        this.estadoState = new EstadoSolicitado();
+        this.observers = new ArrayList<>();
+        this.observers.add(new NotificacionEmail());
+        this.observers.add(new NotificacionSMS());
+        this.observers.add(new NotificacionPush());
+
     }
 
     /**
@@ -84,10 +89,45 @@ public class Envio {
      */
     public void actualizarEstado(EstadoEnvio nuevoEstado) {
         this.estado = nuevoEstado;
-        String msg = "El envío " + idEnvio + " ha cambiado al estado: " + nuevoEstado.getDescripcion();
-        System.out.println(msg);
-        notificarObservers(msg);
+        System.out.println("El envío " + idEnvio + " ha cambiado al estado: " + nuevoEstado.getDescripcion());
+        notificarObservers("El envío ha cambiado al estado: " + nuevoEstado.getDescripcion());
     }
+
+
+    /**
+     * Metodo para registrar un observer del envío.
+     * @param observer
+     */
+    public void agregarObserver(EnvioObserver observer) {
+        if (observers == null) {
+            observers = new ArrayList<>();
+        }
+        observers.add(observer);
+    }
+
+    /**
+     * Metodo para eliminar un observer suscrito.
+     * @param observer
+     */
+    public void eliminarObserver(EnvioObserver observer) {
+        if (observers != null) {
+            observers.remove(observer);
+        }
+    }
+
+    /**
+     * Metodo interno para notificar a todos los observers.
+     * @param mensaje
+     */
+    private void notificarObservers(String mensaje) {
+        if (observers == null || observers.isEmpty()) {
+            return;
+        }
+        for (EnvioObserver observer : observers) {
+            observer.notificar(this, mensaje);
+        }
+    }
+
 
 
     /**
@@ -144,6 +184,7 @@ public class Envio {
     public Usuario getUsuario() { return usuario; }
     public Repartidor getRepartidor() { return repartidor; }
     public List<ServicioAdicional> getServiciosAdicionales() { return serviciosAdicionales; }
+    public EstadoEnvioState getEstadoState() { return estadoState; }
 
 
     public void setCostoBase(double costoBase) {
@@ -156,19 +197,6 @@ public class Envio {
 
     public void setFechaEstimadaEntrega(LocalDateTime fechaEstimadaEntrega) {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-    }
-    public void agregarObserver(EnvioObserver observer) {
-        observers.add(observer);
-    }
-
-    public void removerObserver(EnvioObserver observer) {
-        observers.remove(observer);
-    }
-
-    private void notificarObservers(String mensaje) {
-        for (EnvioObserver obs : observers) {
-            obs.notificar(this, mensaje);
-        }
     }
     public void setEstadoState(EstadoEnvioState nuevo) {
         this.estadoState = nuevo;

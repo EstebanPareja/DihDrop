@@ -85,10 +85,25 @@ public class GestorEnvios {
      */
     public void asignarRepartidor(String idEnvio, Repartidor rep) {
         findEnvioById(idEnvio).ifPresent(envio -> {
-            envio.setRepartidor(rep);
-            envio.actualizarEstado(EstadoEnvio.ASIGNADO);
+            if (envio.getEstadoState() == null) {
+                envio.setEstadoState(new EstadoSolicitado());
+            }
+            envio.getEstadoState().asignar(envio, rep);
         });
     }
+
+
+    /**
+     * Metodo para actualizar el estado de un envío por su ID.
+     * @param idEnvio
+     * @param nuevoEstado
+     */
+    public void actualizarEstadoEnvio(String idEnvio, EstadoEnvio nuevoEstado) {
+        findEnvioById(idEnvio).ifPresent(envio -> {
+            envio.actualizarEstado(nuevoEstado);
+        });
+    }
+
 
 
     /**

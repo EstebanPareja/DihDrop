@@ -52,7 +52,6 @@
                 <HBox spacing="10.0">
                     <children>
 
-                        <!-- Panel Usuarios -->
                         <VBox spacing="5.0" prefWidth="440.0">
                             <children>
                                 <Label text="Gestión de Usuarios">
@@ -179,6 +178,7 @@
                                     </font>
                                 </Label>
                                 <Button text="Refrescar" onAction="#handleRefrescarEnvios"/>
+                                <Button text="Ver reportes" onAction="#handleVerReportes"/>
                             </children>
                         </HBox>
 
@@ -189,6 +189,16 @@
                                 <TableColumn fx:id="envioUsuarioColumn" text="Usuario" prefWidth="200.0"/>
                             </columns>
                         </TableView>
+
+                        <HBox spacing="10.0" alignment="CENTER_LEFT">
+                            <children>
+                                <Label text="Nuevo estado:" />
+                                <ComboBox fx:id="envioEstadoCombo" />
+                                <Button text="Cambiar estado" onAction="#handleCambiarEstadoEnvio"/>
+                                <Label fx:id="envioMensajeLabel" textFill="red" />
+                            </children>
+                        </HBox>
+
                     </children>
                 </VBox>
 

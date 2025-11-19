@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
 
+
 public class CreateShipmentController {
 
     @FXML private TextField origenCalleField;
@@ -53,7 +54,6 @@ public class CreateShipmentController {
     void handleCotizar(ActionEvent event) {
         messageLabel.setText("");
 
-        // 1. Validar entradas
         if (!validarCampos()) {
             return;
         }
@@ -62,19 +62,13 @@ public class CreateShipmentController {
             double peso = Double.parseDouble(pesoField.getText());
             double volumen = Double.parseDouble(volumenField.getText());
 
-            // 2. Calcular costo base usando la estrategia
-            // Simulación de distancia
             double distanciaSimulada = 25.0;
             costoCalculado = GestorEnvios.getInstancia()
                     .getTarifaStrategy()
                     .calcular(peso, volumen, distanciaSimulada);
-
-            // 3. Añadir costos de servicios adicionales (simulado)
             if (seguroCheck.isSelected()) costoCalculado += 5000;
             if (fragilCheck.isSelected()) costoCalculado += 3000;
             if (firmaCheck.isSelected()) costoCalculado += 2000;
-
-            // 4. Mostrar costo y habilitar botón de confirmación
             costoLabel.setText(String.format("$%.2f", costoCalculado));
             confirmarButton.setDisable(false);
 
@@ -104,56 +98,36 @@ public class CreateShipmentController {
             return;
         }
 
-        // Crear objetos Direccion
         Direccion origen = new Direccion("D-ORG", "Origen", origenCalleField.getText(), origenCiudadField.getText(), "0,0");
         Direccion destino = new Direccion("D-DEST", "Destino", destinoCalleField.getText(), destinoCiudadField.getText(), "1,1");
 
-        // Crear el envío usando el Gestor
-        Envio nuevoEnvio = GestorEnvios.getInstancia().crearEnvio(
-                usuarioActual,
-                origen,
-                destino,
-                Double.parseDouble(pesoField.getText()),
+        Envio nuevoEnvio = GestorEnvios.getInstancia().crearEnvio(usuarioActual, origen, destino, Double.parseDouble(pesoField.getText()),
                 Double.parseDouble(volumenField.getText())
         );
 
-        // TODO: Aquí se podrían agregar los decoradores para servicios adicionales
-        // al objeto 'nuevoEnvio' si fuera necesario registrar más detalles.
-
         System.out.println("Envío creado exitosamente con ID: " + nuevoEnvio.getIdEnvio());
-        messageLabel.setText("¡Envío creado con éxito!");
-
-        String metodo = metodoPagoCombo.getValue();
+        String tipoMetodo = "TARJETA";
 
         Pago pago = new Pago(
-                "P-" + nuevoEnvio.getIdEnvio(),
+                "PAG-" + nuevoEnvio.getIdEnvio(),
                 costoCalculado,
                 LocalDateTime.now(),
-                metodo,
+                tipoMetodo,
                 false,
                 nuevoEnvio
         );
-
-// --> FACTORY
-        ProcesadorPago procesador = PagoFactory.crearProcesador(metodo);
-
-// --> ADAPTER
+        ProcesadorPago procesador = PagoFactory.crearProcesador(tipoMetodo);
         boolean aprobado = procesador.procesar(pago);
         pago.setAprobado(aprobado);
 
-        if (!aprobado) {
-            estadoPagoLabel.setText("Pago rechazado");
-            return;
+        if (aprobado) {
+            System.out.println("Pago aprobado para el envío " + nuevoEnvio.getIdEnvio());
+            messageLabel.setText("¡Envío creado y pago aprobado!");
+        } else {
+            System.out.println("Pago rechazado para el envío " + nuevoEnvio.getIdEnvio());
+            messageLabel.setText("Envío creado, pero el pago fue rechazado.");
         }
-        estadoPagoLabel.setText("Pago aprobado");
 
-// Notificación si quieres
-        nuevoEnvio.agregarObserver(new NotificacionEmail());
-        nuevoEnvio.agregarObserver(new NotificacionSMS());
-
-
-
-        // Cerrar la ventana después de crear el envío
         cerrarVentana();
     }
 

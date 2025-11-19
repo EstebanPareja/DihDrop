@@ -2,6 +2,9 @@ package co.edu.uniquindio.poo.dihdrop.Controller;
 
 import co.edu.uniquindio.poo.dihdrop.Model.Administrador;
 import co.edu.uniquindio.poo.dihdrop.Model.EstadoDisponibilidadRepartidor;
+import co.edu.uniquindio.poo.dihdrop.Model.ReportesFacade;
+import java.util.Map;
+import javafx.scene.control.Alert;
 import co.edu.uniquindio.poo.dihdrop.Model.Envio;
 import co.edu.uniquindio.poo.dihdrop.Model.EstadoEnvio;
 import co.edu.uniquindio.poo.dihdrop.Model.GestorEnvios;
@@ -20,6 +23,7 @@ import java.util.List;
 
 public class AdministradorController {
 
+    private final ReportesFacade reportesFacade = new ReportesFacade();
     @FXML
     private Label adminNombreLabel;
     @FXML
@@ -54,6 +58,10 @@ public class AdministradorController {
     private TableColumn<Envio, EstadoEnvio> envioEstadoColumn;
     @FXML
     private TableColumn<Envio, String> envioUsuarioColumn;
+    @FXML
+    private ComboBox<EstadoEnvio> envioEstadoCombo;
+    @FXML
+    private Label envioMensajeLabel;
     @FXML
     private TextField usuarioIdField;
     @FXML
@@ -117,6 +125,10 @@ public class AdministradorController {
         repartidorEstadoCombo.setItems(FXCollections.observableArrayList(EstadoDisponibilidadRepartidor.values()));
         usuarioMensajeLabel.setText("");
         repartidorMensajeLabel.setText("");
+        envioEstadoCombo.setItems(FXCollections.observableArrayList(EstadoEnvio.values()));
+        if (envioMensajeLabel != null) {
+            envioMensajeLabel.setText("");
+        }
     }
 
     /**
@@ -274,6 +286,59 @@ public class AdministradorController {
         List<Envio> envios = GestorEnvios.getInstancia().getTodosLosEnvios();
         enviosObservable.setAll(envios);
     }
+    /**
+     * Metodo para cambiar el estado del envío seleccionado en la tabla.
+     * @param event
+     */
+    @FXML
+    public void handleCambiarEstadoEnvio(ActionEvent event) {
+        Envio seleccionado = enviosTableView.getSelectionModel().getSelectedItem();
+        EstadoEnvio nuevoEstado = envioEstadoCombo.getValue();
+        if (seleccionado == null) {
+            envioMensajeLabel.setText("Seleccione un envío de la tabla.");
+            return;
+        }
+        if (nuevoEstado == null) {
+            envioMensajeLabel.setText("Seleccione un estado en el combo.");
+            return;
+        }
+        GestorEnvios gestor = GestorEnvios.getInstancia();
+        gestor.actualizarEstadoEnvio(seleccionado.getIdEnvio(), nuevoEstado);
+        enviosObservable.setAll(gestor.getTodosLosEnvios());
+        enviosTableView.refresh();
+
+        envioMensajeLabel.setText("Estado actualizado a: " + nuevoEstado.getDescripcion());
+    }
+
+    /**
+     * Metodo para mostrar un reporte básico usando el ReportesFacade.
+     */
+    @FXML
+    public void handleVerReportes(ActionEvent event) {
+        long entregados = reportesFacade.contarEnviosEntregados();
+        double ingresoTotal = reportesFacade.calcularIngresoTotal();
+        Map<String, Long> incidenciasCiudad = reportesFacade.incidenciasPorCiudad();
+
+        StringBuilder contenido = new StringBuilder();
+        contenido.append("Envíos entregados: ").append(entregados).append("\n");
+        contenido.append("Ingreso total: $").append(String.format("%.2f", ingresoTotal)).append("\n");
+        contenido.append("Incidencias por ciudad:\n");
+
+        if (incidenciasCiudad.isEmpty()) {
+            contenido.append("  - No hay incidencias registradas.\n");
+        } else {
+            incidenciasCiudad.forEach((ciudad, cantidad) ->
+                    contenido.append("  - ").append(ciudad).append(": ").append(cantidad).append("\n")
+            );
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Reporte de envíos");
+        alert.setHeaderText("Resumen general de la operación");
+        alert.setContentText(contenido.toString());
+        alert.showAndWait();
+    }
+
 
     /**
      * Metodo para cerrar sesión y volver a la vista de Login

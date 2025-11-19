@@ -11,6 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.dihdrop.Controller.CreateShipmentController">
     <children>
         <Label layoutX="26.0" layoutY="22.0" text="Crear Nuevo Envío">
@@ -18,6 +21,7 @@
                 <Font name="System Bold" size="24.0" />
             </font>
         </Label>
+
 
         <VBox layoutX="26.0" layoutY="70.0" prefWidth="500.0" spacing="15.0">
             <children>
@@ -75,6 +79,22 @@
                         </HBox>
                     </children>
                 </VBox>
+
+
+
+
+                <ComboBox fx:id="metodoPagoCombo" promptText="Método de Pago">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="TARJETA"/>
+                            <String fx:value="PSE"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <Label fx:id="estadoPagoLabel" textFill="GREEN"/>
+
+
+
 
                 <!-- SECCIÓN DE SERVICIOS ADICIONALES -->
                 <VBox spacing="5.0">

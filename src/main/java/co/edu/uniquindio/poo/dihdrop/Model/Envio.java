@@ -19,6 +19,8 @@ public class Envio {
     private Usuario usuario;
     private Repartidor repartidor;
     private List<ServicioAdicional> serviciosAdicionales;
+    private List<EnvioObserver> observers = new ArrayList<>();
+    private EstadoEnvioState estadoState = new EstadoSolicitado();
 
     // Constructor privado para ser usado exclusivamente por el Builder
     private Envio(EnvioBuilder builder) {
@@ -38,7 +40,9 @@ public class Envio {
 
     public void actualizarEstado(EstadoEnvio nuevoEstado) {
         this.estado = nuevoEstado;
-        System.out.println("El envío " + idEnvio + " ha cambiado al estado: " + nuevoEstado.getDescripcion());
+        String msg = "El envío " + idEnvio + " ha cambiado al estado: " + nuevoEstado.getDescripcion();
+        System.out.println(msg);
+        notificarObservers(msg);
     }
 
     public void agregarServicioAdicional(ServicioAdicional servicio) {
@@ -96,6 +100,39 @@ public class Envio {
 
     public void setFechaEstimadaEntrega(LocalDateTime fechaEstimadaEntrega) {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
+    }
+    public void agregarObserver(EnvioObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removerObserver(EnvioObserver observer) {
+        observers.remove(observer);
+    }
+
+    private void notificarObservers(String mensaje) {
+        for (EnvioObserver obs : observers) {
+            obs.notificar(this, mensaje);
+        }
+    }
+    public void setEstadoState(EstadoEnvioState nuevo) {
+        this.estadoState = nuevo;
+    }
+
+    // Métodos de "fachada" al patrón State:
+    public void asignarRepartidorState(Repartidor repartidor) {
+        estadoState.asignar(this, repartidor);
+    }
+
+    public void salirEnRuta() {
+        estadoState.salirEnRuta(this);
+    }
+
+    public void marcarEntregado() {
+        estadoState.entregar(this);
+    }
+
+    public void marcarIncidencia(String detalle) {
+        estadoState.reportarIncidencia(this, detalle);
     }
 
 

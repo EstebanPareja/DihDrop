@@ -1,4 +1,6 @@
 package co.edu.uniquindio.poo.dihdrop.Controller;
+
+import co.edu.uniquindio.poo.dihdrop.App;
 import co.edu.uniquindio.poo.dihdrop.Model.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,7 +25,7 @@ public class Navegacion {
      */
     public static void abrirLogin(Stage stage) {
         try {
-            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_LOGIN));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_LOGIN));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setTitle("Plataforma Logística - Acceso");
@@ -34,19 +36,14 @@ public class Navegacion {
         }
     }
 
-    /**
-     * Abre el Dashboard principal y cierra la ventana anterior (Login).
-     */
     public static void abrirDashboard(Stage stageAnterior, Usuario usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_DASHBOARD));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_DASHBOARD));
             Parent root = loader.load();
 
-            // Obtener el controlador para pasarle el usuario
             MainDashboardController controller = loader.getController();
             controller.initData(usuario);
 
-            // Reutilizamos el Stage si es posible, o creamos uno nuevo si se prefiere
             Stage stage = stageAnterior;
             stage.setTitle("Plataforma Logística - Panel Principal");
             stage.setScene(new Scene(root));
@@ -58,12 +55,9 @@ public class Navegacion {
         }
     }
 
-    /**
-     * Abre la ventana de Crear Envío como una ventana modal (bloquea la anterior hasta cerrar).
-     */
     public static void abrirCrearEnvio(Usuario usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_CREAR_ENVIO));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_CREAR_ENVIO));
             Parent root = loader.load();
 
             CreateShipmentController controller = loader.getController();
@@ -72,7 +66,7 @@ public class Navegacion {
             Stage stage = new Stage();
             stage.setTitle("Crear Nuevo Envío");
             stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL); // Bloquea la ventana de atrás
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
 
         } catch (IOException e) {
@@ -80,12 +74,9 @@ public class Navegacion {
         }
     }
 
-    /**
-     * Abre la ventana de Historial como modal.
-     */
     public static void abrirHistorial(Usuario usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_HISTORIAL));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_HISTORIAL));
             Parent root = loader.load();
 
             ShipmentHistoryController controller = loader.getController();
@@ -102,12 +93,9 @@ public class Navegacion {
         }
     }
 
-    /**
-     * Abre los detalles de un envío específico.
-     */
     public static void abrirDetallesEnvio(Envio envio) {
         try {
-            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_DETALLES));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_DETALLES));
             Parent root = loader.load();
 
             ShipmentDetailsController controller = loader.getController();
@@ -124,12 +112,9 @@ public class Navegacion {
         }
     }
 
-    /**
-     * Abre la gestión de perfil.
-     */
     public static void abrirPerfil(Usuario usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_PERFIL));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(VISTA_PERFIL));
             Parent root = loader.load();
 
             ProfileManagementController controller = loader.getController();

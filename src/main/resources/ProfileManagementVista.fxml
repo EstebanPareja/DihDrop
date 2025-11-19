@@ -21,7 +21,7 @@
                     </font>
                 </Label>
 
-                <!-- SECCIÓN DE DATOS PERSONALES -->
+
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Información Personal">
@@ -45,7 +45,12 @@
 
                 <Separator prefWidth="200.0" />
 
-                <!-- SECCIÓN DE DIRECCIONES FRECUENTES -->
+                <HBox spacing="10">
+                    <children>
+                        <Button text="Atrás" onAction="#handleAtras"/>
+                    </children>
+                </HBox>
+
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Mis Direcciones Frecuentes">

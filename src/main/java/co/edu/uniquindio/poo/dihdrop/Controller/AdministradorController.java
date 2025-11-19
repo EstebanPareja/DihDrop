@@ -166,6 +166,16 @@ public class AdministradorController {
             usuarioMensajeLabel.setText("Ya existe un usuario con ese ID.");
         }
     }
+    /**
+     * Metodo para volver al login desde cualquier vista
+     * @param event evento de la interfaz
+     */
+    @FXML
+    public void handleAtras(ActionEvent event) {
+        Stage stageActual = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Navegacion.abrirLogin(stageActual);
+    }
+
 
     /**
      * Metodo para manejar la eliminación del usuario seleccionado

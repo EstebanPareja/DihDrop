@@ -84,6 +84,17 @@ public class CreateShipmentController {
     }
 
     /**
+     * Metodo para volver al login desde cualquier vista
+     * @param event evento de la interfaz
+     */
+    @FXML
+    public void handleAtras(ActionEvent event) {
+        Stage stageActual = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Navegacion.abrirLogin(stageActual);
+    }
+
+
+    /**
      * Maneja la confirmación y creación final del envío.
      */
     @FXML

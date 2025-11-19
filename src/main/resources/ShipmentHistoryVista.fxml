@@ -19,7 +19,7 @@
             </font>
         </Label>
 
-        <!-- Panel de Filtros -->
+
         <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="75.0" prefWidth="750.0" spacing="10.0">
             <children>
                 <Label text="Desde:" />
@@ -33,7 +33,7 @@
             </children>
         </HBox>
 
-        <!-- Tabla de Envíos -->
+
         <TableView fx:id="historyTableView" layoutX="25.0" layoutY="125.0" prefHeight="400.0" prefWidth="750.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID Envío" />
@@ -45,7 +45,7 @@
             </columns>
         </TableView>
 
-        <!-- Panel de Acciones -->
+
         <HBox alignment="CENTER_RIGHT" layoutX="25.0" layoutY="540.0" prefWidth="750.0" spacing="15.0">
             <children>
                 <Button fx:id="detailsButton" disable="true" onAction="#handleVerDetalles" prefHeight="30.0" text="Ver Detalles" />

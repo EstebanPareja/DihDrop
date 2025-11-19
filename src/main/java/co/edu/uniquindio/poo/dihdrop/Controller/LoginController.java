@@ -33,6 +33,11 @@ public class LoginController {
         registerMessageLabel.setText("");
     }
 
+    /**
+     * Metodo para manejar el inicio de sesión.
+     * Permite ingresar como administrador o como usuario normal.
+     * @param event
+     */
     @FXML
     void handleLogin(ActionEvent event) {
         String email = emailField.getText();
@@ -43,23 +48,38 @@ public class LoginController {
             return;
         }
 
-        // --- Lógica de Autenticación (Simulada) ---
+        Stage stageActual = (Stage) loginButton.getScene().getWindow();
+
+        if (email.equals("admin@test.com") && password.equals("admin123")) {
+
+            Administrador administrador = new Administrador(
+                    "ADM-001",
+                    "Administrador General",
+                    email,
+                    "555-0000"
+            );
+
+            Navegacion.abrirPanelAdministrador(stageActual, administrador);
+            return;
+
+        }
+
         if (email.equals("usuario@test.com") && password.equals("1234")) {
 
-            // --- CAMBIO: Lógica de navegación ---
-            // 1. Creamos un usuario de prueba para poder pasarlo a las otras vistas.
-            Usuario usuarioSimulado = new Usuario("U001", "Juan Pérez", email, "555-1234");
+            Usuario usuarioSimulado = new Usuario(
+                    "U001",
+                    "Juan Pérez",
+                    email,
+                    "555-1234"
+            );
 
-            // 2. Obtenemos la ventana (Stage) actual desde cualquier componente, como el botón.
-            Stage stageActual = (Stage) loginButton.getScene().getWindow();
-
-            // 3. Usamos nuestra clase de Navegacion para abrir el dashboard.
             Navegacion.abrirDashboard(stageActual, usuarioSimulado);
 
         } else {
             loginMessageLabel.setText("Correo o contraseña incorrectos.");
         }
     }
+
 
     @FXML
     void handleRegister(ActionEvent event) {

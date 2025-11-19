@@ -20,6 +20,8 @@ public class Navegacion {
     private static final String VISTA_HISTORIAL = "/ShipmentHistoryVista.fxml";
     private static final String VISTA_DETALLES = "/ShipmentDetailsVista.fxml";
     private static final String VISTA_PERFIL = "/ProfileManagementVista.fxml";
+    private static final String VISTA_ADMIN = "/AdministradorVista.fxml";
+
     /**
      * Abre la ventana de Login. Se usa al iniciar la app o al cerrar sesión.
      */
@@ -54,6 +56,29 @@ public class Navegacion {
             e.printStackTrace();
         }
     }
+    /**
+     * Abre el panel de administrador reutilizando la ventana actual.
+     * @param stageAnterior ventana desde la que se llama
+     * @param administrador administrador autenticado
+     */
+    public static void abrirPanelAdministrador(Stage stageAnterior, Administrador administrador) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Navegacion.class.getResource(VISTA_ADMIN));
+            Parent root = loader.load();
+            AdministradorController controller = loader.getController();
+            controller.initData(administrador);
+
+            Stage stage = stageAnterior;
+            stage.setTitle("Plataforma Logística - Panel de Administración");
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void abrirCrearEnvio(Usuario usuario) {
         try {

@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
 import java.util.Optional;
 import java.util.UUID;
 
@@ -115,7 +117,7 @@ public class ProfileManagementController {
         Direccion seleccionada = direccionesListView.getSelectionModel().getSelectedItem();
         if (seleccionada == null) return;
 
-        // Simulación de edición con un diálogo
+
         TextInputDialog dialog = new TextInputDialog(seleccionada.getAlias());
         dialog.setTitle("Editar Dirección");
         dialog.setContentText("Nuevo alias:");
@@ -127,6 +129,17 @@ public class ProfileManagementController {
             messageLabel.setText("Dirección actualizada.");
         });
     }
+
+    /**
+     * Metodo para volver al login desde cualquier vista
+     * @param event evento de la interfaz
+     */
+    @FXML
+    public void handleAtras(ActionEvent event) {
+        Stage stageActual = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        Navegacion.abrirLogin(stageActual);
+    }
+
 
     /**
      * Elimina la dirección seleccionada de la lista.

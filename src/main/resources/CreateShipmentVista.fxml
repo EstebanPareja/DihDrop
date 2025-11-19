@@ -25,7 +25,7 @@
 
         <VBox layoutX="26.0" layoutY="70.0" prefWidth="500.0" spacing="15.0">
             <children>
-                <!-- SECCIÓN DE ORIGEN -->
+
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Dirección de Origen">
@@ -42,7 +42,13 @@
                     </children>
                 </VBox>
 
-                <!-- SECCIÓN DE DESTINO -->
+                <HBox spacing="10">
+                    <children>
+                        <Button text="Atrás" onAction="#handleAtras"/>
+                    </children>
+                </HBox>
+
+
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Dirección de Destino">
@@ -96,7 +102,7 @@
 
 
 
-                <!-- SECCIÓN DE SERVICIOS ADICIONALES -->
+
                 <VBox spacing="5.0">
                     <children>
                         <Label text="Servicios Adicionales">
